@@ -154,7 +154,7 @@
   (require-init 'init-writting t)
   (require-init 'init-hydra) ; hotkey is required everywhere
   ;; use evil mode (vi key binding)
-  (require-init 'init-evil) ; init-evil dependent on init-clipboard
+  ;;(require-init 'init-evil) ; init-evil dependent on init-clipboard
 
   ;; ediff configuration should be last so it can override
   ;; the key bindings in previous configuration
@@ -183,6 +183,19 @@
   (message "Emacs startup time: %d seconds."
            (time-to-seconds (time-since emacs-load-start-time))))
 
+;; C-SPACE 被输入法占用，C-@ 又太难按，于是把 set mark 绑定到 C-return
+(define-key global-map [C-return] 'set-mark-command)
+
+; 开启全局 Company 补全
+(global-company-mode 1)
+;comment
+(global-set-key (kbd "C-c C-k") 'comment-line)
+
+;;Please note the color theme'name is "molokai"
+(load-theme 'wombat t)
+
+; 限制C-SPACE快捷键的用法
+(global-set-key (kbd "C-SPC") nil)
 ;;; Local Variables:
 ;;; no-byte-compile: t
 ;;; End:
